@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scott O'Brien · Software Engineer</title>
+  <meta name="description" content="Scott O'Brien — Software Engineer. JavaScript, web platforms, and side projects." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ============================================
+       Reset + base
+       ============================================ */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #0A0E1A;
+      background: #FFFFFF;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; max-width: 100%; }
+    button { font: inherit; cursor: pointer; }
+
+    /* ============================================
+       Layout shell — gives the page a "card" feel
+       ============================================ */
+    .page {
+      max-width: 1240px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: #FFFFFF;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.04),
+        0 20px 60px -20px rgba(15, 23, 42, 0.15);
+      position: relative;
+    }
+
+    /* ============================================
+       Header
+       ============================================ */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 20px 32px;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: saturate(180%) blur(14px);
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+      border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+    }
+    .brand {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      color: #0A0E1A;
+      flex-shrink: 0;
+    }
+
+    /* Pill nav */
+    .pill-nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px;
+      background: rgba(15, 23, 42, 0.04);
+      border-radius: 999px;
+    }
+    .pill-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #5B6478;
+      transition: all 0.18s ease;
+      white-space: nowrap;
+    }
+    .pill-nav a:hover { color: #0A0E1A; }
+    .pill-nav a.active {
+      background: #FFFFFF;
+      color: #0A0E1A;
+      box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.06),
+        0 2px 8px rgba(15, 23, 42, 0.04);
+    }
+    .pill-nav svg { width: 14px; height: 14px; }
+
+    /* Socials */
+    .socials {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .socials a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      color: #0A0E1A;
+      transition: all 0.15s ease;
+    }
+    .socials a:hover { background: rgba(15, 23, 42, 0.05); }
+    .socials svg { width: 18px; height: 18px; }
+
+    /* ============================================
+       Sections
+       ============================================ */
+    .section {
+      min-height: 100vh;
+      padding: 80px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .section-inner {
+      width: 100%;
+      max-width: 720px;
+      text-align: center;
+    }
+
+    /* ============================================
+       About (hero)
+       ============================================ */
+    .hero-eyebrow {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.08);
+      color: #2563EB;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: clamp(40px, 6.5vw, 76px);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin: 0 0 16px;
+      color: #0A0E1A;
+    }
+    .hero h1 .accent { color: #2563EB; }
+    .hero .title {
+      font-size: clamp(18px, 2vw, 22px);
+      font-weight: 500;
+      color: #0A0E1A;
+      margin: 0 0 20px;
+    }
+    .hero .lede {
+      font-size: 17px;
+      color: #5B6478;
+      margin: 0 auto 32px;
+      max-width: 560px;
+      line-height: 1.6;
+    }
+    .hero .ctas {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 600;
+      transition: transform 0.12s ease, box-shadow 0.18s ease, background 0.18s ease;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .btn svg { width: 16px; height: 16px; }
+    .btn-primary {
+      background: #2563EB;
+      color: #FFFFFF;
+      box-shadow: 0 6px 16px -4px rgba(37, 99, 235, 0.35);
+    }
+    .btn-primary:hover {
+      background: #1D4ED8;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px -4px rgba(37, 99, 235, 0.45);
+    }
+    .btn-secondary {
+      background: #FFFFFF;
+      color: #0A0E1A;
+      border-color: rgba(15, 23, 42, 0.12);
+    }
+    .btn-secondary:hover {
+      background: #F4F5FA;
+      transform: translateY(-1px);
+    }
+
+    /* ============================================
+       What I do + tech stack (within About section)
+       ============================================ */
+    .block { margin-top: 80px; text-align: center; }
+    .block h2 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      font-size: clamp(24px, 3vw, 32px);
+      letter-spacing: -0.02em;
+      margin: 0 0 16px;
+    }
+    .block p {
+      font-size: 16px;
+      color: #5B6478;
+      line-height: 1.7;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 14px;
+      margin-top: 32px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .tech-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 22px 12px;
+      background: #F4F5FA;
+      border-radius: 14px;
+      transition: transform 0.15s ease, background 0.18s ease;
+    }
+    .tech-card:hover {
+      transform: translateY(-2px);
+      background: #ECEEF6;
+    }
+    .tech-card .icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tech-card .icon img { width: 100%; height: 100%; object-fit: contain; }
+    .tech-card .name {
+      font-size: 13px;
+      font-weight: 500;
+      color: #0A0E1A;
+    }
+
+    /* ============================================
+       Experience — timeline
+       ============================================ */
+    .experience-header { margin-bottom: 56px; margin-top: 0; }
+
+    .timeline {
+      position: relative;
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      padding-left: 28px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(37, 99, 235, 0.3), rgba(15, 23, 42, 0.08));
+    }
+    .timeline-item {
+      position: relative;
+      padding-bottom: 36px;
+      text-align: left;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -28px;
+      top: 8px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #2563EB;
+      border: 2px solid #FFFFFF;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .timeline-item.muted::before {
+      background: #C5C9D6;
+      box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.06);
+    }
+    .timeline-date {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #5B6478;
+      margin-bottom: 4px;
+    }
+    .timeline-item.muted .timeline-date { color: #8B91A1; }
+    .timeline-role {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.015em;
+      color: #0A0E1A;
+      margin: 0 0 2px;
+    }
+    .timeline-company {
+      font-size: 14px;
+      font-weight: 500;
+      color: #5B6478;
+      margin: 0 0 8px;
+    }
+    .timeline-company a {
+      color: #0A0E1A;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.15);
+      transition: border-color 0.15s ease;
+    }
+    .timeline-company a:hover { border-color: #2563EB; }
+    .timeline-desc {
+      font-size: 14.5px;
+      color: #5B6478;
+      line-height: 1.65;
+      margin: 0 0 4px;
+    }
+    .timeline-apps {
+      list-style: disc;
+      padding-left: 20px;
+      margin: 10px 0 0;
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: #5B6478;
+    }
+    .timeline-apps li {
+      margin: 0 0 4px;
+    }
+    .timeline-apps li:last-child { margin-bottom: 0; }
+    .timeline-apps strong {
+      color: #0A0E1A;
+      font-weight: 400;
+    }
+    .timeline-apps .placeholder {
+      color: #B0B6C4;
+      font-style: italic;
+    }
+
+    /* ============================================
+       Contact
+       ============================================ */
+    .contact .lede {
+      font-size: 17px;
+      color: #5B6478;
+      max-width: 520px;
+      margin: 0 auto 32px;
+    }
+    .contact-ctas {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    /* ============================================
+       Footer
+       ============================================ */
+    .site-footer {
+      padding: 24px 32px;
+      text-align: center;
+      font-size: 13px;
+      color: #8B91A1;
+      border-top: 1px solid rgba(15, 23, 42, 0.05);
+    }
+
+    /* ============================================
+       Responsive
+       ============================================ */
+    @media (max-width: 720px) {
+      .site-header { padding: 14px 16px; gap: 12px; }
+      .brand { font-size: 16px; }
+      .pill-nav a { padding: 7px 12px; font-size: 13px; }
+      .pill-nav a span.label { display: none; }
+      .pill-nav a { padding: 8px; }
+      .section { padding: 60px 20px; }
+      .block { margin-top: 56px; }
+      .timeline { padding-left: 24px; }
+    }
+    @media (max-width: 480px) {
+      .socials { display: none; }
+    }
+
+    /* Reveal animation */
+    .reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- =========================
+         Header
+         ========================= -->
+    <header class="site-header">
+      <a href="#about" class="brand">Scott O'Brien</a>
+
+      <nav class="pill-nav" aria-label="Primary">
+        <a href="#about" class="active" data-target="about">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="label">About</span>
+        </a>
+        <a href="#experience" data-target="experience">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          <span class="label">Experience</span>
+        </a>
+        <a href="#contact" data-target="contact">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+          <span class="label">Contact</span>
+        </a>
+      </nav>
+
+      <div class="socials">
+        <a href="https://github.com/scottobrien" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.75 5.48.75 11.75c0 4.96 3.22 9.17 7.69 10.65.56.1.77-.24.77-.55v-2.16c-3.13.68-3.79-1.34-3.79-1.34-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.73.39-1.22.71-1.5-2.5-.29-5.13-1.25-5.13-5.56 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.42.11-2.97 0 0 .94-.3 3.09 1.15a10.7 10.7 0 0 1 5.62 0c2.15-1.45 3.09-1.15 3.09-1.15.61 1.55.23 2.69.11 2.97.72.79 1.16 1.79 1.16 3.02 0 4.32-2.63 5.27-5.14 5.55.4.35.76 1.03.76 2.08v3.08c0 .31.21.66.78.55 4.46-1.49 7.68-5.69 7.68-10.65C23.25 5.48 18.27.5 12 .5Z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/scott-o-brien-5a1a8431/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- =========================
+         About
+         ========================= -->
+    <section id="about" class="section about">
+      <div class="section-inner hero reveal">
+        <span class="hero-eyebrow">Open to interesting work</span>
+        <h1>Hi, I'm <span class="accent">Scott O'Brien</span></h1>
+        <p class="title">AI Engineer · Product &amp; Workflow Automation</p>
+        <p class="lede">
+          I build AI products end to end. The workflow is the product — the AI is just one piece of it.
+        </p>
+        <div class="ctas">
+          <a href="#experience" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            View Experience
+          </a>
+          <a href="mailto:scott.thomas.obrien@gmail.com" class="btn btn-secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+            Get in Touch
+          </a>
+        </div>
+
+        <div class="block">
+          <h2>What I do</h2>
+          <p>
+            At <a href="https://servicenow.com/" target="_blank" rel="noopener" style="color:#0A0E1A;border-bottom:1px solid rgba(15,23,42,0.2);">ServiceNow</a> I build automated workflows for the enterprise. Currently I'm taking the same playbook to small businesses — AI-native workflow tools and end to end products.
+          </p>
+        </div>
+
+        <div class="block">
+          <h2>Tech I work with</h2>
+          <div class="tech-grid">
+            <div class="tech-card">
+              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/javascript.svg" alt="JavaScript" /></div>
+              <span class="name">JavaScript</span>
+            </div>
+            <div class="tech-card">
+              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/typescript.svg" alt="TypeScript" /></div>
+              <span class="name">TypeScript</span>
+            </div>
+            <div class="tech-card">
+              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/react.svg" alt="React" /></div>
+              <span class="name">React</span>
+            </div>
+            <div class="tech-card">
+              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nodedotjs.svg" alt="Node.js" /></div>
+              <span class="name">Node.js</span>
+            </div>
+            <div class="tech-card">
+              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nextdotjs.svg" alt="Next.js" /></div>
+              <span class="name">Next.js</span>
+            </div>
+            <div class="tech-card">
+              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/html5.svg" alt="HTML5" /></div>
+              <span class="name">HTML5</span>
+            </div>
+            <div class="tech-card">
+              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/css.svg" alt="CSS" /></div>
+              <span class="name">CSS</span>
+            </div>
+            <div class="tech-card">
+              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/python.svg" alt="Python" /></div>
+              <span class="name">Python</span>
+            </div>
+            <div class="tech-card">
+              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/servicenow.svg" alt="ServiceNow" /></div>
+              <span class="name">ServiceNow</span>
+            </div>
+            <div class="tech-card">
+              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/amazonwebservices.svg" alt="AWS" /></div>
+              <span class="name">AWS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         Experience
+         ========================= -->
+    <section id="experience" class="section experience">
+      <div class="section-inner">
+        <div class="block experience-header reveal">
+          <h2>Experience</h2>
+          <p>Where I've spent my time — and what I built there.</p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item reveal">
+            <span class="timeline-date">2017 – Present</span>
+            <h3 class="timeline-role">Sr. Software Engineer</h3>
+            <p class="timeline-company"><a href="https://servicenow.com/" target="_blank" rel="noopener">ServiceNow</a> · AI cloud platform</p>
+            <ul class="timeline-apps">
+              <li><strong>HR</strong> — <span class="placeholder">verbiage coming soon</span></li>
+              <li><strong>CMDB</strong> — <span class="placeholder">verbiage coming soon</span></li>
+              <li><strong>SecOps</strong> — <span class="placeholder">verbiage coming soon</span></li>
+            </ul>
+          </div>
+
+          <div class="timeline-item reveal">
+            <span class="timeline-date">2019 – 2026</span>
+            <h3 class="timeline-role">Founder · PropertyFlo</h3>
+            <p class="timeline-company"><a href="https://stevebotnow.github.io/propertyflo/" target="_blank" rel="noopener">PropertyFlo</a> · Side project · Property transaction workflow</p>
+            <p class="timeline-desc">A property transaction workflow app — intake, documents, and pipeline tracking for real estate pros. (Placeholder — flesh this out later.)</p>
+          </div>
+
+          <div class="timeline-item reveal">
+            <span class="timeline-date">2014 – 2017</span>
+            <h3 class="timeline-role">Software Engineer</h3>
+            <p class="timeline-company"><a href="https://seamgen.com/" target="_blank" rel="noopener">Seamgen</a> · Custom software development</p>
+            <p class="timeline-desc">
+              Shipped mobile and web apps for clients including Comic-Con, Viasat, and
+              Builders Insurance. JS-heavy full-stack work with a small team that moved
+              fast.
+            </p>
+          </div>
+
+          <div class="timeline-item reveal">
+            <span class="timeline-date">2011 – 2012</span>
+            <h3 class="timeline-role">UI Engineer</h3>
+            <p class="timeline-company"><a href="https://abacus.net/" target="_blank" rel="noopener">Abacus.net</a> · Specialty insurance</p>
+            <p class="timeline-desc">
+              In-house engineering for a specialty insurance carrier. Internal tools,
+              quote-to-bind flows, and a lot of legacy-system wrangling.
+            </p>
+          </div>
+
+          <div class="timeline-item reveal">
+            <span class="timeline-date">2010 – 2011</span>
+            <h3 class="timeline-role">Engineer</h3>
+            <p class="timeline-company">American Mobile Ventures · Mobile marketing</p>
+            <p class="timeline-desc">
+              Early mobile marketing work. SMS campaigns, mobile web, and the kind of
+              campaigns that taught me what "scale" meant before it was a buzzword.
+            </p>
+          </div>
+
+          <div class="timeline-item muted reveal">
+            <span class="timeline-date">2008 – Present</span>
+            <h3 class="timeline-role">Independent · scott-obrien.com</h3>
+            <p class="timeline-company">Side projects &amp; client work</p>
+            <p class="timeline-desc">
+              The long-running lab. Shipped <a href="https://thevettd.com/" target="_blank" rel="noopener" style="color:#0A0E1A;border-bottom:1px solid rgba(15,23,42,0.15);">TheVettd</a>,
+              Ripplenami, Lottogopher, a golf app, a multi-timer, and a few other things
+              that never made it past the garage.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         Contact
+         ========================= -->
+    <section id="contact" class="section contact">
+      <div class="section-inner reveal">
+        <h1 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(40px,6.5vw,76px);line-height:1.05;letter-spacing:-0.04em;margin:0 0 20px;">Let's work together</h1>
+        <p class="lede">
+          Got a project, a role, or just an interesting problem? I'm always up for a
+          conversation about building something useful.
+        </p>
+        <div class="contact-ctas">
+          <a href="mailto:scott.thomas.obrien@gmail.com" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+            Get in Touch
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         Footer
+         ========================= -->
+    <footer class="site-footer">
+      © 2026 Scott O'Brien. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    // ============================================
+    // Active nav state via IntersectionObserver
+    // ============================================
+    (function () {
+      const navLinks = document.querySelectorAll('.pill-nav a');
+      const sections = ['about', 'experience', 'contact'].map((id) => document.getElementById(id));
+
+      function setActive(id) {
+        navLinks.forEach((link) => {
+          link.classList.toggle('active', link.dataset.target === id);
+        });
+      }
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          // Pick the entry closest to the top of the viewport that is intersecting
+          const visible = entries
+            .filter((e) => e.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+          if (visible.length > 0) {
+            setActive(visible[0].target.id);
+          }
+        },
+        {
+          // Top "trigger zone" — when the section's top crosses 30% from the top of the viewport
+          rootMargin: '-30% 0px -60% 0px',
+          threshold: 0,
+        }
+      );
+
+      sections.forEach((s) => s && io.observe(s));
+
+      // Click → immediate active feedback
+      navLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          navLinks.forEach((l) => l.classList.remove('active'));
+          link.classList.add('active');
+        });
+      });
+    })();
+
+    // ============================================
+    // Reveal on scroll
+    // ============================================
+    (function () {
+      const els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach((el) => el.classList.add('in'));
+        return;
+      }
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { rootMargin: '0px 0px -10% 0px', threshold: 0.05 }
+      );
+      els.forEach((el) => io.observe(el));
+    })();
+  </script>
+</body>
+</html>
