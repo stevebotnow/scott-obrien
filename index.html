@@ -370,6 +370,29 @@
       color: #0A0E1A;
       font-weight: 400;
     }
+    .timeline-apps ul {
+      list-style: none;
+      padding-left: 4px;
+      margin: 6px 0 0;
+    }
+    .timeline-apps ul li {
+      position: relative;
+      padding-left: 13px;
+      margin: 0 0 5px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .timeline-apps ul li:last-child { margin-bottom: 0; }
+    .timeline-apps ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 5px;
+      height: 1.5px;
+      border-radius: 1px;
+      background: #B0B6C4;
+    }
     .timeline-apps .placeholder {
       color: #B0B6C4;
       font-style: italic;
@@ -489,7 +512,7 @@
         </div>
 
         <div class="block">
-          <h2>Tech I work with</h2>
+          <h2>Common tech I work with</h2>
           <div class="tech-grid">
             <div class="tech-card">
               <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/javascript.svg" alt="JavaScript" /></div>
@@ -552,9 +575,28 @@
             <h3 class="timeline-role">Sr. Software Engineer</h3>
             <p class="timeline-company"><a href="https://servicenow.com/" target="_blank" rel="noopener">ServiceNow</a> · AI cloud platform</p>
             <ul class="timeline-apps">
-              <li><strong>HR</strong> — <span class="placeholder">verbiage coming soon</span></li>
-              <li><strong>CMDB</strong> — <span class="placeholder">verbiage coming soon</span></li>
-              <li><strong>SecOps</strong> — <span class="placeholder">verbiage coming soon</span></li>
+              <li>
+                <strong>HR</strong>
+                <ul>
+                  <li>Led the team building service portal architecture across multiple projects.</li>
+                  <li>Contributed to ServiceNow's new AI portal, Employee Works, and integrated Moveworks into the HR product.</li>
+                  <li>Work directly with customers to debug, resolve issues, and provide solutions within their ServiceNow instance.</li>
+                </ul>
+              </li>
+              <li>
+                <strong>CMDB</strong>
+                <ul>
+                  <li>Led the UI architecture team for Data Manager, the custom out-of-box CMDB app.</li>
+                  <li>Work directly with customers to resolve CMDB issues and provide solutions within their instances.</li>
+                </ul>
+              </li>
+              <li>
+                <strong>SecOps</strong>
+                <ul>
+                  <li>Contributed to a custom application and provided integration assistance.</li>
+                  <li>Work directly with customers to resolve SecOps issues and provide solutions within their instances.</li>
+                </ul>
+              </li>
             </ul>
           </div>
 
@@ -562,7 +604,7 @@
             <span class="timeline-date">2019 – 2026</span>
             <h3 class="timeline-role">Founder · PropertyFlo</h3>
             <p class="timeline-company"><a href="https://stevebotnow.github.io/propertyflo/" target="_blank" rel="noopener">PropertyFlo</a> · Property transaction workflow</p>
-            <p class="timeline-desc">A realestate transaction workflow app that removes the email back-and-forth between buyers, sellers, agents, lenders, escrow, and title — one shared portal instead. Onboarding, e-signing, tasks, messaging, secure uploads, templates, and PDF generation. Generated over 50+ sign-ups to date.</p>
+            <p class="timeline-desc">A realestate transaction workflow app that removes the email back-and-forth between buyers, sellers, agents, lenders, escrow, and title — one shared portal instead. Provides end users with onboarding, e-signing, tasks, messaging, secure uploads, templates, and PDF generation. Generated over 50+ sign-ups to date.</p>
           </div>
 
           <div class="timeline-item reveal">
