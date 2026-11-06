@@ -3,8 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scott O'Brien · Software Engineer</title>
-  <meta name="description" content="Scott O'Brien — Software Engineer. JavaScript, web platforms, and side projects." />
+  <title>Scott O'Brien · AI Engineer</title>
+  <meta name="description" content="Scott O'Brien — AI engineer building workflow automation and end-to-end AI products. Currently at ServiceNow, building PropertyFlo on the side." />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://stevebotnow.github.io/scott-obrien/" />
+  <meta property="og:title" content="Scott O'Brien · AI Engineer" />
+  <meta property="og:description" content="I build tools that fix how work gets done. Some of them use AI." />
+  <meta property="og:image" content="https://stevebotnow.github.io/scott-obrien/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Scott O'Brien · AI Engineer" />
+  <meta name="twitter:description" content="I build tools that fix how work gets done. Some of them use AI." />
+  <meta name="twitter:image" content="https://stevebotnow.github.io/scott-obrien/og-image.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,7 +33,13 @@
        Reset + base
        ============================================ */
     *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      /* Anchor jumps must clear the sticky header, and #about (the first
+         section) must land on the true top of the page, not 91px down. */
+      scroll-padding-top: var(--header-h, 91px);
+    }
+    :root { --header-h: 91px; }
     body {
       margin: 0;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -184,6 +205,9 @@
       gap: 12px;
       justify-content: center;
       flex-wrap: wrap;
+      /* Balances the gap below (80px to "What I do") so the buttons sit
+         centred between the title above and the next section. */
+      margin-top: 80px;
     }
 
     /* Buttons */
@@ -241,7 +265,8 @@
     }
     .tech-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      /* 105px min keeps 12 cards at a clean 6x2 inside the 720px column */
+      grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
       gap: 14px;
       margin-top: 32px;
       max-width: 720px;
@@ -366,6 +391,34 @@
       margin: 0 0 4px;
     }
     .timeline-apps li:last-child { margin-bottom: 0; }
+
+    /* Flat bullet list for entries without a grouped heading */
+    .timeline-bullets {
+      list-style: none;
+      padding-left: 17px;
+      margin: 10px 0 0;
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: #5B6478;
+    }
+    .timeline-bullets li {
+      position: relative;
+      padding-left: 13px;
+      margin: 0 0 5px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .timeline-bullets li:last-child { margin-bottom: 0; }
+    .timeline-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 5px;
+      height: 1.5px;
+      border-radius: 1px;
+      background: #B0B6C4;
+    }
     .timeline-apps strong {
       color: #0A0E1A;
       font-weight: 400;
@@ -430,6 +483,7 @@
        Responsive
        ============================================ */
     @media (max-width: 720px) {
+      :root { --header-h: 71px; }
       .site-header { padding: 14px 16px; gap: 12px; }
       .brand { font-size: 16px; }
       .pill-nav a { padding: 7px 12px; font-size: 13px; }
@@ -437,6 +491,7 @@
       .pill-nav a { padding: 8px; }
       .section { padding: 60px 20px; }
       .block { margin-top: 56px; }
+      .hero .ctas { margin-top: 56px; }
       .timeline { padding-left: 24px; }
     }
     @media (max-width: 480px) {
@@ -487,12 +542,9 @@
          ========================= -->
     <section id="about" class="section about">
       <div class="section-inner hero reveal">
-        <span class="hero-eyebrow">Open to interesting work</span>
+        <span class="hero-eyebrow">Available for projects</span>
         <h1>Hi, I'm <span class="accent">Scott O'Brien</span></h1>
         <p class="title">AI Engineer · Product &amp; Workflow Automation</p>
-        <p class="lede">
-          I build AI products end to end. The workflow is the product — the AI is just one piece of it.
-        </p>
         <div class="ctas">
           <a href="#experience" class="btn btn-primary">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
@@ -507,7 +559,7 @@
         <div class="block">
           <h2>What I do</h2>
           <p>
-            At <a href="https://servicenow.com/" target="_blank" rel="noopener" style="color:#0A0E1A;border-bottom:1px solid rgba(15,23,42,0.2);">ServiceNow</a> I build automated workflows for the enterprise. Currently I'm taking the same playbook to small businesses — AI-native workflow tools and end to end products.
+            At <a href="https://servicenow.com/" target="_blank" rel="noopener" style="color:#0A0E1A;border-bottom:1px solid rgba(15,23,42,0.2);">ServiceNow</a>, I build automated workflows for enterprise customers and debug their setups. Now I'm doing the same for small businesses.
           </p>
         </div>
 
@@ -515,46 +567,54 @@
           <h2>Common tech I work with</h2>
           <div class="tech-grid">
             <div class="tech-card">
-              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/javascript.svg" alt="JavaScript" /></div>
-              <span class="name">JavaScript</span>
-            </div>
-            <div class="tech-card">
               <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/anthropic.svg" alt="Claude" /></div>
               <span class="name">Claude</span>
-            </div>
-            <div class="tech-card">
-              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/amazonwebservices.svg" alt="AWS" /></div>
-              <span class="name">AWS</span>
-            </div>
-            <div class="tech-card">
-              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nodedotjs.svg" alt="Node.js" /></div>
-              <span class="name">Node.js</span>
             </div>
             <div class="tech-card">
               <div class="icon"><img src="openclaw.svg" alt="OpenClaw" /></div>
               <span class="name">OpenClaw</span>
             </div>
             <div class="tech-card">
-              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/html5.svg" alt="HTML5" /></div>
-              <span class="name">HTML5</span>
+              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/modelcontextprotocol.svg" alt="MCP" /></div>
+              <span class="name">MCP</span>
             </div>
             <div class="tech-card">
-              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/sqlite.svg" alt="SQLite" /></div>
-              <span class="name">SQLite</span>
+              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/fastapi.svg" alt="FastAPI" /></div>
+              <span class="name">FastAPI</span>
             </div>
             <div class="tech-card">
               <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/python.svg" alt="Python" /></div>
               <span class="name">Python</span>
             </div>
             <div class="tech-card">
+              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/react.svg" alt="React" /></div>
+              <span class="name">React</span>
+            </div>
+            <div class="tech-card">
+              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nodedotjs.svg" alt="Node.js" /></div>
+              <span class="name">Node.js</span>
+            </div>
+            <div class="tech-card">
+              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/postgresql.svg" alt="Postgres" /></div>
+              <span class="name">Postgres</span>
+            </div>
+            <div class="tech-card">
+              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/docker.svg" alt="Docker" /></div>
+              <span class="name">Docker</span>
+            </div>
+            <div class="tech-card">
               <div class="icon"><img src="servicenow.svg" alt="ServiceNow" /></div>
               <span class="name">ServiceNow</span>
             </div>
             <div class="tech-card">
-              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/digitalocean.svg" alt="Digital Ocean" /></div>
-              <span class="name">Digital Ocean</span>
+              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/amazonwebservices.svg" alt="AWS" /></div>
+              <span class="name">AWS</span>
             </div>
+            <div class="tech-card">
+              <div class="icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/digitalocean.svg" alt="DigitalOcean" /></div>
+              <span class="name">DigitalOcean</span>
             </div>
+          </div>
         </div>
       </div>
     </section>
@@ -580,7 +640,7 @@
                 <ul>
                   <li>Led the team building service portal architecture across multiple projects.</li>
                   <li>Contributed to ServiceNow's new AI portal, Employee Works, and integrated Moveworks into the HR product.</li>
-                  <li>Work directly with customers to debug, resolve issues, and provide solutions within their ServiceNow instance.</li>
+                  <li>Work directly with customers to debug, resolve HR issues, and provide solutions within their ServiceNow instance.</li>
                 </ul>
               </li>
               <li>
@@ -593,7 +653,7 @@
               <li>
                 <strong>SecOps</strong>
                 <ul>
-                  <li>Contributed to a custom application and provided integration assistance.</li>
+                  <li>Contributed to a custom application that provided integration assistance.</li>
                   <li>Work directly with customers to resolve SecOps issues and provide solutions within their instances.</li>
                 </ul>
               </li>
@@ -604,7 +664,10 @@
             <span class="timeline-date">2019 – 2026</span>
             <h3 class="timeline-role">Founder · PropertyFlo</h3>
             <p class="timeline-company"><a href="https://stevebotnow.github.io/propertyflo/" target="_blank" rel="noopener">PropertyFlo</a> · Property transaction workflow</p>
-            <p class="timeline-desc">A realestate transaction workflow app that removes the email back-and-forth between buyers, sellers, agents, lenders, escrow, and title — one shared portal instead. Provides end users with onboarding, e-signing, tasks, messaging, secure uploads, templates, and PDF generation. Generated over 50+ sign-ups to date.</p>
+            <ul class="timeline-bullets">
+              <li>A real estate transaction workflow app that removes the email back-and-forth between buyers, sellers, agents, lenders, escrow, and title — one shared portal instead. Provides end users with simple client/3rd party onboarding, e-signing, HTML to PDF generation, tasks, messaging, secure uploads, and templates.</li>
+              <li>Generated over 50+ sign-ups to date.</li>
+            </ul>
           </div>
 
           <div class="timeline-item reveal">
